@@ -29,6 +29,7 @@
   list-style-type: none;
   padding: 2.5px;
   border: #eeeeee solid 1px;
+  background-color: #ffffff;
 }
 #userList>li>span:hover {
   color: #333333;
@@ -41,6 +42,7 @@
   text-decoration: none;
   padding: 2.5px;
   border: #eeeeee solid 1px;
+  background-color: #ffffff;
 }
 #toggleUserList:visited { color: #666666; }
 #toggleUserList:hover {
@@ -53,14 +55,17 @@ form {
   z-index: 10;
   width: 100%;
   position: absolute;
-  height: 20px;
+  height: 30px;
   bottom: 0px;
-  padding: 4px;
-  background-color: green;
+  border: 8px solid #000;
+  border-right: 2px;
+  background-color: #000;
 }
 input {
   width: 80%;
+  height: 30px;
 }
 button {
   width: 18.75%;
+  height: 30px;
 }

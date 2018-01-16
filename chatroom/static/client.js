@@ -22,6 +22,7 @@ socket.on('updateUsers', function(u) {
     $('#userList').append('<li>You: '+user.name + '<span style="color: #dddddd">#' + user.id + '</span></li>');
     }
   }
+  reloadUList();
 });
 
 function sendMsg() {
@@ -35,18 +36,30 @@ function showMessage(msg) {
   $('#log').prepend('<li class="logmsg">'+$( $.parseHTML(msg) ).text()+'</li>');
 }
 function showUserMessage(user, id, msg) {
-  $('#log').prepend('<li class="user-'+id+'" data-user='+user+'>'+user + ': ' + $( $.parseHTML(msg) ).text()+'</li>');
+  var date = new Date();
+  var time = date.getHours()+':'+date.getMinutes();
+  $('#log').prepend('<li class="user-'+id+'" data-user='+user+'>'+user + ': ' + $( $.parseHTML(msg) ).text()+'<span style="position: absolute; right: 15px;">'+time+'</span></li>');
 }
 
 function toggleDropdown() {
   if($('#ec').attr('data-expand') == 'true') {
     $('#userListDropdown').css('top', '-'+$('#userList').outerHeight()+'px');
-    $('#ec').html('Collapse');
+    $('#ec').html('Expand');
     $('#ec').attr('data-expand', 'false');
   } else {
-    $('#userList').removeAttr('hidden');
+    //$('#userList').removeAttr('hidden');
     $('#userListDropdown').css('top', '0');
-    $('#ec').html('Expand');
+    $('#ec').html('Collapse');
     $('#ec').attr('data-expand', 'true');
+  }
+}
+
+function reloadUList() {
+  if($('#ec').attr('data-expand') == 'false') {
+    $('#userListDropdown').css('top', '-'+$('#userList').outerHeight()+'px');
+    console.log($('#ec').attr('data-expand') + ' -'+$('#userList').outerHeight()+'px')
+  } else {
+    $('#userListDropdown').css('top', '0');
+    console.log($('#ec').attr('data-expand') + ' 0')
   }
 }
