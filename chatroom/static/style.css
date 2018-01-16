@@ -4,8 +4,50 @@
 }
 
 #log {
-
+  list-style: none;
+  padding: 10px;
 }
+#log>li {
+  padding: 2.5px 10px;
+}
+/*#log>li.logmsg {
+  border-bottom: #eeeeee solid 1px;
+}
+#log>li[class|="user"]:last-child {
+  color: red;
+  border-bottom: #eeeeee solid 1px;
+}*/
+#log>li:not(:last-child) {
+  border-bottom: #eeeeee solid 1px;
+}
+
+#userListDropdown {
+  position: absolute;
+  right: 0;
+}
+#userList {
+  list-style-type: none;
+  padding: 2.5px;
+  border: #eeeeee solid 1px;
+}
+#userList>li>span:hover {
+  color: #333333;
+}
+#userListDropdown>p {
+  padding: 2.5px;
+}
+#toggleUserList {
+  color: #666666;
+  text-decoration: none;
+  padding: 2.5px;
+  border: #eeeeee solid 1px;
+}
+#toggleUserList:visited { color: #666666; }
+#toggleUserList:hover {
+  color: #333333;
+  background-color: #fafafa;
+}
+
 
 form {
   z-index: 10;

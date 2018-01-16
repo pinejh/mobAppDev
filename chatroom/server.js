@@ -23,7 +23,7 @@ io.on('connection', function(socket) {
     io.emit('updateUsers', users);
   });
   socket.on('chatMessage', function(user, msg) {
-    io.emit('showMessage', user, msg);
+    io.emit('showMessage', user, socket.id, msg);
   });
   socket.on('disconnect', function() {
     for(var i = users.length - 1; i >= 0; i--) {

@@ -4,6 +4,10 @@
 <script src="client.js"></script>
 <ul id="log">
 </ul>
+<div id="userListDropdown" style="top: 0px;">
+  <ul id="userList" hidden></ul>
+  <p style="text-align: right"><a href="#" id="toggleUserList" onclick="toggleDropdown()"><span id="ec" data-expand="false">Expand</span> User List</a></p>
+</div>
 <form action="#" onsubmit="sendMsg();return false">
   <input name="msgInput" id="msgInput" autocomplete="off">
   <button id="submit">Send</button>

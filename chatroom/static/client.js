@@ -10,10 +10,17 @@ socket.on('userConnect', function(user_name) {
 });
 
 var users;
+//var uList = $('#userList');
 socket.on('updateUsers', function(u) {
   users = [];
+  $('#userList').empty();
   for (user of u) {
-    if(user.id != socket.id) users.push(user);
+    if(user.id != socket.id) {
+      users.push(user);
+      $('#userList').append('<li>'+user.name + '<span style="color: #dddddd">#' + user.id + '</span></li>');
+    } else {
+    $('#userList').append('<li>You: '+user.name + '<span style="color: #dddddd">#' + user.id + '</span></li>');
+    }
   }
 });
 
@@ -21,9 +28,25 @@ function sendMsg() {
   socket.emit('chatMessage', name, $('#msgInput').val());
   $('#msgInput').val('');
 };
-socket.on('showMessage', function(user, msg) {
-  showMessage(user + ': ' + msg);
+socket.on('showMessage', function(user, id, msg) {
+  showUserMessage(user, id, msg);
 });
 function showMessage(msg) {
-  $('#log').prepend('<li class="msg">'+$( $.parseHTML(msg) ).text()+'</li>');
+  $('#log').prepend('<li class="logmsg">'+$( $.parseHTML(msg) ).text()+'</li>');
+}
+function showUserMessage(user, id, msg) {
+  $('#log').prepend('<li class="user-'+id+'" data-user='+user+'>'+user + ': ' + $( $.parseHTML(msg) ).text()+'</li>');
+}
+
+function toggleDropdown() {
+  if($('#ec').attr('data-expand') == 'true') {
+    $('#userListDropdown').css('top', '-'+$('#userList').outerHeight()+'px');
+    $('#ec').html('Collapse');
+    $('#ec').attr('data-expand', 'false');
+  } else {
+    $('#userList').removeAttr('hidden');
+    $('#userListDropdown').css('top', '0');
+    $('#ec').html('Expand');
+    $('#ec').attr('data-expand', 'true');
+  }
 }
