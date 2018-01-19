@@ -15,5 +15,16 @@ var shotTypes = [
     damage: 0,
     explDamage: 10,
     explColor: "#0000ff"
+  },
+  {
+    name: "Big Shot",
+    radius: 10,
+    color: "#000",
+    trail: true,
+    trailColor: "#ff0000",
+    explRadius: 15,
+    damage: 0,
+    explDamage: 10,
+    explColor: "#ff0000"
   }
 ];

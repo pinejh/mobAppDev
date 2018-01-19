@@ -1,4 +1,4 @@
-var currAngle = 45, currPower = 50;
+var currAngle = 45, currPower = 50, currWeapon = "Single Shot";
 
 function changeAngle() {
   var newangle = document.getElementById('angleSlider').value;
@@ -11,8 +11,9 @@ function changePower() {
   document.getElementById('dispPower').innerHTML = newpower;
 }
 function changeWeapon() {
-  console.log(document.getElementById('weaponWheel').value);
+  currWeapon = document.getElementById('weaponWheel').value;
+  console.log(currWeapon);
 }
 function fire() {
-  entities.push(new Shot(currAngle, currPower, 0, canvas.height, getShotType("Single Shot")));
+  entities.push(new Shot(currAngle, currPower, 0, canvas.height, getShotType(currWeapon)));
 }
