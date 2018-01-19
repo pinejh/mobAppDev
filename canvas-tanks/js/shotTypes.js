@@ -10,7 +10,7 @@ var shotTypes = [
     radius: 5,
     color: "#000",
     trail: true,
-    trailColor: "#000",
+    trailColor: "#0000ff",
     explRadius: 10,
     damage: 0,
     explDamage: 10,

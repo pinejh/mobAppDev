@@ -20,8 +20,8 @@ function update() {
   }
   for (var i = explosions.length-1; i >= 0; i--) {
     explosions[i].update();
-    if(explosions[i].remove) {explosions.splice(i, 1); console.log("endExplosion")}
-    
+    if(explosions[i].remove) explosions.splice(i, 1);
+
   }
 
   requestAnimationFrame(update);

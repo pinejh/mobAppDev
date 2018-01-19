@@ -24,6 +24,9 @@ class Vector {
     this.x *= scalar;
     this.y *= scalar;
   }
+  toString() {
+    return this.x +", "+ this.y;
+  }
 }
 
 function rad(num) { return num * Math.PI / 180; }
