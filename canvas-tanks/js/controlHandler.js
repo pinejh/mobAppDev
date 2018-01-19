@@ -14,5 +14,5 @@ function changeWeapon() {
   console.log(document.getElementById('weaponWheel').value);
 }
 function fire() {
-  entities.push(new Shot(currAngle, currPower, 0, canvas.height));
+  entities.push(new Shot(currAngle, currPower, 0, canvas.height, getShotType("Single Shot")));
 }
