@@ -30,19 +30,21 @@ class Shot {
     //console.log(Math.floor(this.pos.x) + ', ' + Math.floor(this.pos.y));
   }
   explode() {
-    explosions.push(new Explosion(this.pos, this.options));
+    explosions.push(new Explosion(this.pos, this.options, this.trail));
   }
 }
 
 class Explosion {
-  constructor(pos, options) {
+  constructor(pos, options, trail) {
     this.pos = pos;
     this.remove = false;
     this.options = options;
     this.alpha = 1;
+    if(this.options.trail) this.trail = trail;
   }
   update() {
-    this.alpha -= 1/59;
+    if(this.options.trail && this.trail.pts.length > 0) this.trail.stopTrail();
+
     c.save();
     c.beginPath();
     c.arc(this.pos.x, this.pos.y, this.options.explRadius, 0, TWOPI, false);
@@ -50,6 +52,9 @@ class Explosion {
     c.fillStyle = this.options.explColor;
     c.fill();
     c.restore();
+
+    this.alpha -= 1/59;
+    this.alpha.clamp(0, 1);
     if(this.alpha <= 0) this.remove = true;
   }
 }
@@ -79,5 +84,8 @@ class Trail {
     }
     c.restore();
   }
-  //stopTrail() {}
+  stopTrail() {
+    this.draw();
+    this.pts.splice(this.pts.length-1, 1);
+  }
 }
