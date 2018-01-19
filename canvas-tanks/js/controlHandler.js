@@ -12,8 +12,8 @@ function changePower() {
 }
 function changeWeapon() {
   currWeapon = document.getElementById('weaponWheel').value;
-  console.log(currWeapon);
+  document.getElementById('dispWeapon').innerHTML = currWeapon;
 }
 function fire() {
-  entities.push(new Shot(currAngle, currPower, 0, canvas.height, getShotType(currWeapon)));
+  entities.unshift(new Shot(currAngle, currPower, 0, canvas.height, getShotType(currWeapon)));
 }

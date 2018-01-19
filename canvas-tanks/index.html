@@ -1,6 +1,6 @@
 <body onload="update()">
-  <canvas style="border: 1px black solid"></canvas>
-  <table id="controls" border="1">
+  <canvas style="border: 1px black solid; background-image: url('assets/night-background.png')"></canvas>
+  <table id="controls" border="1" width="642px">
     <tr>
       <th>Angle: <span id="dispAngle">45</span></th>
       <th>Power: <span id="dispPower">50</span></th>
@@ -11,7 +11,7 @@
       <td><input id="angleSlider" name="angleSlider" type="range" min="0" max="90" value="45" onchange="changeAngle()"></td>
       <td><input id="powerSlider" name="powerSlider" type="range" min="1" max="100" value="50" onchange="changePower()"></td>
       <td>
-        <select name="weaponWheel" id="weaponWheel" onchange="changeWeapon()">
+        <select name="weaponWheel" id="weaponWheel" style="width: 100%" onchange="changeWeapon()">
           <option value="Single Shot">Single Shot</option>
           <option value="Big Shot">Big Shot</option>
         </select>

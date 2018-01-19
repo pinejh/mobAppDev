@@ -8,23 +8,23 @@ var shotTypes = [
   {
     name: "Single Shot",
     radius: 5,
-    color: "#000",
+    color: "#ffffff",
     trail: true,
-    trailColor: "#0000ff",
-    explRadius: 10,
+    trailColor: "#e0e0e0",
+    explRadius: 12,
     damage: 0,
     explDamage: 10,
-    explColor: "#0000ff"
+    explColor: "#ffffff"
   },
   {
     name: "Big Shot",
-    radius: 10,
-    color: "#000",
+    radius: 8,
+    color: "#ffffff",
     trail: true,
-    trailColor: "#ff0000",
-    explRadius: 15,
+    trailColor: "#e0e0e0",
+    explRadius: 17.5,
     damage: 0,
     explDamage: 10,
-    explColor: "#ff0000"
+    explColor: "#ffffff"
   }
 ];
