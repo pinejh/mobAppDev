@@ -4,8 +4,18 @@ canvas.height = 480;
 
 var c = canvas.getContext('2d');
 
+var players = [];
 var entities = [];
 var explosions = [];
+
+var currPlayerIndex = 0;
+
+function init() {
+  players.push(new Player(new Vector(0, canvas.height), 'green'));
+  players.push(new Player(new Vector(canvas.width, canvas.height), 'red'));
+  currPlayer = players[currPlayerIndex];
+  update();
+}
 
 function update() {
   c.clearRect(0, 0, canvas.width, canvas.height);
@@ -18,6 +28,9 @@ function update() {
       entities.splice(i, 1);
     }
   }
+  for (var i = players.length-1; i >= 0; i--) {
+    players[i].update();
+  }
   for (var i = explosions.length-1; i >= 0; i--) {
     explosions[i].update();
     if(explosions[i].remove) explosions.splice(i, 1);
@@ -25,4 +38,10 @@ function update() {
   }
 
   requestAnimationFrame(update);
+}
+
+function nextPlayer() {
+  currPlayerIndex++;
+  if(currPlayerIndex >= players.length) currPlayerIndex[0];
+  currPlayer = players[currPlayerIndex];
 }

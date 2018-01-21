@@ -16,4 +16,5 @@ function changeWeapon() {
 }
 function fire() {
   entities.unshift(new Shot(currAngle, currPower, 0, canvas.height, getShotType(currWeapon)));
+  nextPlayer();
 }
