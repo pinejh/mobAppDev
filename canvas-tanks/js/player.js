@@ -8,7 +8,7 @@ class Player {
     this.img = new Image();
     this.img.src = 'assets/'+this.playerColor+'.png';
     this.angle = 0;
-    this.sangle = rad(45);
+    this.sangle = rad(90);
     this.spower = 50;
     this.sweapon = 'Single Shot';
   }

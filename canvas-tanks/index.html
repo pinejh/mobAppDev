@@ -9,13 +9,13 @@
     <canvas></canvas>
     <table id="controls" border="1" width="642px">
       <tr>
-        <th>Angle: <span id="dispAngle">45</span></th>
+        <th>Angle: <span id="dispAngle">90</span></th>
         <th>Power: <span id="dispPower">50</span></th>
         <th>Weapon: <span id="dispWeapon">Single Shot</span></th>
         <td rowspan="2"><button id="fireButton" onclick="fire()">Fire</button></td>
       </tr>
       <tr>
-        <td><input id="angleSlider" name="angleSlider" type="range" min="0" max="90" value="45" onchange="changeAngle()"></td>
+        <td><input id="angleSlider" name="angleSlider" type="range" min="0" max="180" value="90" onchange="changeAngle()"></td>
         <td><input id="powerSlider" name="powerSlider" type="range" min="1" max="100" value="50" onchange="changePower()"></td>
         <td>
           <select name="weaponWheel" id="weaponWheel" style="width: 100%" onchange="changeWeapon()">
