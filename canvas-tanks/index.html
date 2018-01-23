@@ -4,7 +4,7 @@
   <title>Canvas Tanks</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body onload="init()">
+<body onload="init()" onkeypress="keypress(event)" onkeydown="keydown(event)" onkeyup="keyup(event)">
   <div id="game-container">
     <canvas></canvas>
     <table id="controls" border="1" width="642px">
@@ -12,7 +12,7 @@
         <th>Angle: <span id="dispAngle">90</span></th>
         <th>Power: <span id="dispPower">50</span></th>
         <th>Weapon: <span id="dispWeapon">Single Shot</span></th>
-        <td rowspan="2"><button id="fireButton" onclick="fire()">Fire</button></td>
+        <td rowspan="2"><a id="fireButton" onclick="fire()">Fire</a></td>
       </tr>
       <tr>
         <td><input id="angleSlider" name="angleSlider" type="range" min="0" max="180" value="90" onchange="changeAngle()"></td>
@@ -30,7 +30,7 @@
   <script src="js/util.js"></script>
   <script src="js/shotTypes.js"></script>
   <script src="js/controlHandler.js"></script>
-  <script src="js/Player.js"></script>
+  <script src="js/player.js"></script>
   <script src="js/shots.js"></script>
 </body>
 </html>

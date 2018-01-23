@@ -13,6 +13,16 @@ class Player {
     this.sweapon = 'Single Shot';
   }
   update() {
+    var dispAngle = Math.floor(deg(this.sangle)%TWOPI));
+    if(dispAngle > 90&& dispAngle < 270) {
+      dispAngle = 180-dispAngle;
+    } else if (dispAngle >= 270) {
+      dispAngle = -360+dispAngle;
+    }
+    c.font = "10px Arial";
+    c.fillStyle = "#ffffff";
+    c.textAlign = "center";
+    c.fillText(dispAngle+', '+this.spower,this.pos.x,this.pos.y-this.origin.y-15);
     c.beginPath();
     c.moveTo(this.pos.x, this.pos.y-this.origin.y/2);
     c.lineTo(this.pos.x+Math.cos(this.sangle)*18, this.pos.y-this.origin.y/2-Math.sin(this.sangle)*18);
