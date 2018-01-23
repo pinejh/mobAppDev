@@ -13,7 +13,8 @@ class Player {
     this.sweapon = 'Single Shot';
   }
   update() {
-    var dispAngle = Math.floor(deg(this.sangle)%TWOPI));
+    if(this.sangle < 0) this.sangle+=TWOPI;
+    var dispAngle = Math.floor(deg(this.sangle%TWOPI));
     if(dispAngle > 90&& dispAngle < 270) {
       dispAngle = 180-dispAngle;
     } else if (dispAngle >= 270) {

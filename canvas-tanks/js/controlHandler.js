@@ -12,7 +12,7 @@ function changePower() {
 }
 function changeWeapon() {
   currPlayer.sweapon = document.getElementById('weaponWheel').value;
-  document.getElementById('dispWeapon').innerHTML = currWeapon;
+  document.getElementById('dispWeapon').innerHTML = currPlayer.sweapon;
 }
 function fire() {
   currPlayer.fire();
