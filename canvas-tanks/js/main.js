@@ -14,8 +14,8 @@ var currYOffDir = 1;
 
 function init() {
   initBackground();
-  players.push(new Player(new Vector(canvas.width/8, canvas.height*7/8), 'green'));
-  players.push(new Player(new Vector(canvas.width*7/8, canvas.height*7/8), 'red'));
+  players.push(new Player(canvas.width/8, 'green'));
+  players.push(new Player(canvas.width*7/8, 'red'));
   currPlayer = players[currPlayerIndex];
   update();
 }
@@ -39,15 +39,17 @@ function update() {
   if (currYOff <= 0) currYOffDir = 1;
   else if (currYOff >= 10) currYOffDir = -1;
   currYOff += currYOffDir*.2;
+  c.save();
   c.beginPath();
   c.moveTo(currPlayer.pos.x, currPlayer.pos.y-40-currYOff);
   c.lineTo(currPlayer.pos.x-6, currPlayer.pos.y-47-currYOff);
   c.lineTo(currPlayer.pos.x+6, currPlayer.pos.y-47-currYOff);
   c.fillStyle = "#44a8ff";
-  c.strokeStyle = "rgba(68, 168, 255, .75)"
+  c.shadowColor = "#44a8ff";
+  c.shadowBlur = 10;
   c.closePath();
   c.fill();
-  c.stroke();
+  c.restore();
   for (var i = explosions.length-1; i >= 0; i--) {
     explosions[i].update();
     if(explosions[i].remove) explosions.splice(i, 1);

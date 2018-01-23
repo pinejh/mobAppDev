@@ -1,6 +1,6 @@
 class Player {
-  constructor(pos, color) {
-    this.pos = pos;
+  constructor(x, color) {
+    this.pos = new Vector(x, canvas.height-groundHeight(x));
     this.origin = new Vector(31/2, 16);
     this.playerColor = color;
     if(this.playerColor == 'green') this.barrelColor = '#0f0';
