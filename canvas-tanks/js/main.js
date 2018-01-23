@@ -23,6 +23,8 @@ function init() {
 function update() {
   c.clearRect(0, 0, canvas.width, canvas.height);
 
+  handleKeys();
+
   drawBackground();
 
   for (var i = entities.length-1; i >= 0; i--) {

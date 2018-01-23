@@ -1,6 +1,9 @@
 Number.prototype.clamp = function(min, max) {
   return Math.min(Math.max(this, min), max);
 }
+function clamp(num, min, max) {
+  return Math.min(Math.max(num, min), max);
+}
 var TWOPI = Math.PI*2;
 
 class Vector {

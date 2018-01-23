@@ -9,7 +9,12 @@ canvas {
 }
 
 table {
-
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 #weaponHeader {
   width: 250px;
@@ -20,12 +25,6 @@ table {
   text-align: center;
   display: inline-block;
   width: 217px;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
   margin-right: -16px;
 }
 #fireButton:hover {
