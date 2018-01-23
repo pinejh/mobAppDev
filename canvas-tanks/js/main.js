@@ -11,8 +11,8 @@ var explosions = [];
 var currPlayerIndex = 0;
 
 function init() {
-  players.push(new Player(new Vector(0, canvas.height), 'green'));
-  players.push(new Player(new Vector(canvas.width, canvas.height), 'red'));
+  players.push(new Player(new Vector(canvas.width/8, canvas.height*7/8), 'green'));
+  players.push(new Player(new Vector(canvas.width*7/8, canvas.height*7/8), 'red'));
   currPlayer = players[currPlayerIndex];
   update();
 }
@@ -42,6 +42,6 @@ function update() {
 
 function nextPlayer() {
   currPlayerIndex++;
-  if(currPlayerIndex >= players.length) currPlayerIndex[0];
+  if(currPlayerIndex >= players.length) currPlayerIndex = 0;
   currPlayer = players[currPlayerIndex];
 }

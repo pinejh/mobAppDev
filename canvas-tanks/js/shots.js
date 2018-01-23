@@ -4,7 +4,7 @@ var powerScale = .175;
 
 class Shot {
   constructor(angle, power, x, y, options) {
-    this.startAngle = rad(angle);
+    this.startAngle = angle;
     this.startPower = power;
     this.pos = new Vector(x, y);
     this.vel = new Vector();
