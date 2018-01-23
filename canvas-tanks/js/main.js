@@ -13,6 +13,7 @@ var currYOff = 0;
 var currYOffDir = 1;
 
 function init() {
+  initBackground();
   players.push(new Player(new Vector(canvas.width/8, canvas.height*7/8), 'green'));
   players.push(new Player(new Vector(canvas.width*7/8, canvas.height*7/8), 'red'));
   currPlayer = players[currPlayerIndex];
@@ -60,4 +61,5 @@ function nextPlayer() {
   currPlayerIndex++;
   if(currPlayerIndex >= players.length) currPlayerIndex = 0;
   currPlayer = players[currPlayerIndex];
+  updateWeapon();
 }

@@ -9,14 +9,12 @@
     <canvas></canvas>
     <table id="controls" border="1" width="642px">
       <tr>
-        <th>Angle: <span id="dispAngle">90</span></th>
-        <th>Power: <span id="dispPower">50</span></th>
-        <th>Weapon: <span id="dispWeapon">Single Shot</span></th>
+        <td>Health Bar Goes Here</td>
+        <th id="weaponHeader">Weapon: <span id="dispWeapon">Single Shot</span></th>
         <td rowspan="2"><a id="fireButton" onclick="fire()">Fire</a></td>
       </tr>
       <tr>
-        <td><input id="angleSlider" name="angleSlider" type="range" min="0" max="180" value="90" onchange="changeAngle()"></td>
-        <td><input id="powerSlider" name="powerSlider" type="range" min="1" max="100" value="50" onchange="changePower()"></td>
+        <td>other stat goes here</td>
         <td>
           <select name="weaponWheel" id="weaponWheel" style="width: 100%" onchange="changeWeapon()">
             <option value="Single Shot">Single Shot</option>
