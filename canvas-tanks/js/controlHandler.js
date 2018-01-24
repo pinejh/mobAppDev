@@ -10,12 +10,16 @@ function fire() {
   currPlayer.fire();
 }
 
-var keyMap = {up: false, down: false, left: false, right: false};
+var keyMap = {up: false, down: false, left: false, right: false, w: false, s: false, a: false, d: false};
 addEventListener("keydown", function(e) {
   if(e.keyCode == 38) keyMap.up = true;
   if(e.keyCode == 40) keyMap.down = true;
   if(e.keyCode == 37) keyMap.left = true;
   if(e.keyCode == 39) keyMap.right = true;
+  if(e.keyCode == 87) keyMap.w = true;
+  if(e.keyCode == 83) keyMap.s = true;
+  if(e.keyCode == 65) keyMap.a = true;
+  if(e.keyCode == 68) keyMap.d = true;
 });
 addEventListener("keyup", function(e) {
   if(e.keyCode == 32) {
@@ -26,6 +30,10 @@ addEventListener("keyup", function(e) {
   if(e.keyCode == 40) keyMap.down = false;
   if(e.keyCode == 37) keyMap.left = false;
   if(e.keyCode == 39) keyMap.right = false;
+  if(e.keyCode == 87) keyMap.w = false;
+  if(e.keyCode == 83) keyMap.s = false;
+  if(e.keyCode == 65) keyMap.a = false;
+  if(e.keyCode == 68) keyMap.d = false;
 });
 
 function handleKeys() {
@@ -42,5 +50,17 @@ function handleKeys() {
   }
   if(keyMap.right) {
     currPlayer.sangle -= rad(.25);
+  }
+  if(keyMap.w) {
+    //changeweapon
+  }
+  if(keyMap.s) {
+    //changeweapon
+  }
+  if(keyMap.a) {
+    currPlayer.move(-1);
+  }
+  if(keyMap.d) {
+    currPlayer.move(+1);
   }
 }

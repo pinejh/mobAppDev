@@ -7,7 +7,7 @@ class Player {
     else this.barrelColor = '#f00';
     this.img = new Image();
     this.img.src = 'assets/'+this.playerColor+'.png';
-    this.angle = 0;
+    this.angle = groundAngle(x);
     this.sangle = rad(90);
     this.spower = 50;
     this.sweapon = 'Single Shot';
@@ -25,8 +25,8 @@ class Player {
     c.textAlign = "center";
     c.fillText(dispAngle+', '+Math.round(this.spower),this.pos.x,this.pos.y-this.origin.y-15);
     c.beginPath();
-    c.moveTo(this.pos.x, this.pos.y-this.origin.y/2);
-    c.lineTo(this.pos.x+Math.cos(this.sangle)*18, this.pos.y-this.origin.y/2-Math.sin(this.sangle)*18);
+    c.moveTo(this.pos.x+Math.sin(this.angle)*this.origin.y/2, this.pos.y-Math.cos(this.angle)*this.origin.y/2);
+    c.lineTo(this.pos.x+Math.sin(this.angle)*this.origin.y/2+Math.cos(this.sangle)*18, this.pos.y-Math.cos(this.angle)*this.origin.y/2-Math.sin(this.sangle)*18);
     c.lineWidth = 3;
     c.strokeStyle = this.barrelColor;
     c.stroke();
@@ -37,8 +37,14 @@ class Player {
     c.restore();
   }
 
+  move(amt) {
+    this.pos.x += amt;
+    this.pos.y = canvas.height-groundHeight(this.pos.x);
+    this.angle = groundAngle(this.pos.x);
+  }
+
   fire() {
-    entities.unshift(new Shot(rad(Math.round(deg(this.sangle))), Math.round(this.spower), this.pos.x, this.pos.y-this.origin.y/2, getShotType(this.sweapon)));
+    entities.unshift(new Shot(rad(Math.round(deg(this.sangle))), Math.round(this.spower), this.pos.x+Math.sin(this.angle)*this.origin.y/2+Math.cos(this.sangle)*18, this.pos.y-Math.cos(this.angle)*this.origin.y/2-Math.sin(this.sangle)*18, getShotType(this.sweapon)));
     nextPlayer();
   }
 }

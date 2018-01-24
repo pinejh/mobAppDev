@@ -21,15 +21,22 @@ function drawBackground() {
 }
 
 function groundHeight(x) {
-  x.clamp(-1, 641);
-  if((x+1)%gYScale == 0) return ground[Math.floor((x+1)/gYScale)];
+  x = clamp(x, -1, 641);
+  if((x+1)%gXScale == 0) return ground[Math.floor((x+1)/gXScale)]*gYScale;
   else {
-    var lower = Math.floor((x+1)/gYScale), upper = Math.ceil((x+1)/gYScale);
-    var weight = -lower + (x+1)/gYScale;
+    var lower = Math.floor((x+1)/gXScale), upper = Math.ceil((x+1)/gXScale);
+    var weight = -lower + (x+1)/gXScale;
     return (ground[lower]*(1-weight)+ground[upper]*weight)*gYScale;
   }
 }
 
 function groundAngle(x) {
-  
+  x = clamp(x, -1, 641);
+  if((x+1)%gYScale == 0) {
+    return (groundAngle(x-.1)+groundAngle(x+.1))/2;
+  }
+  else {
+    var lower = -ground[Math.floor((x+1)/gXScale)], upper = -ground[Math.ceil((x+1)/gXScale)];
+    return Math.atan((upper-lower)/gXScale)*1.5;
+  }
 }
