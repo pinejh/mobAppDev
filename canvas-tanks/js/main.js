@@ -30,7 +30,8 @@ function update() {
   for (var i = entities.length-1; i >= 0; i--) {
     entities[i].update();
     if(entities[i].pos.x > canvas.width) entities.splice(i, 1);
-    else if(entities[i].pos.y > canvas.height) {
+    else if(entities[i].pos.y > canvas.height || entities[i].pos.y > canvas.height - groundHeight(entities[i].pos.x)) {
+      entities[i].pos.addVector(new Vector(-entities[i].vel.x/3, -entities[i].vel.y/3));
       entities[i].explode();
       entities.splice(i, 1);
     }
@@ -55,7 +56,6 @@ function update() {
   for (var i = explosions.length-1; i >= 0; i--) {
     explosions[i].update();
     if(explosions[i].remove) explosions.splice(i, 1);
-
   }
 
   requestAnimationFrame(update);
