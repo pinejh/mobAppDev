@@ -7,22 +7,18 @@
 <body onload="init()">
   <div id="game-container">
     <canvas></canvas>
-    <table id="controls" border="1" width="642px">
-      <tr>
-        <td id="healthBarCell">Health Bar Goes Here</td>
-        <th id="weaponHeader">Weapon: <span id="dispWeapon">Single Shot</span></th>
-        <td rowspan="2"><a id="fireButton" onclick="fire()">Fire</a></td>
-      </tr>
-      <tr>
-        <td>other stat goes here</td>
-        <td>
-          <select name="weaponWheel" id="weaponWheel" style="width: 100%" onchange="changeWeapon()">
-            <option value="Single Shot">Single Shot</option>
-            <option value="Big Shot">Big Shot</option>
-          </select>
-        </td>
-      </tr>
-    </table>
+    <div id="controls">
+      <div id="heathBar">Bar Goes Here</div>
+      <div id="weaponHeader">Weapon: <span id="dispWeapon">Single Shot</span></div>
+      <a id="fireButton" onclick="fire()">Fire</a>
+      <div>other stat here</div>
+      <div id="weaponWheelDiv">
+        <select name="weaponWheel" id="weaponWheel" style="width: 100%" onchange="changeWeapon()">
+          <option value="Single Shot">Single Shot</option>
+          <option value="Big Shot">Big Shot</option>
+        </select>
+      </div>
+    </div>
   </div>
   <script src="js/main.js"></script>
   <script src="js/util.js"></script>

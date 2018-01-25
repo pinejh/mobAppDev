@@ -11,6 +11,7 @@ class Player {
     this.sangle = rad(90);
     this.spower = 50;
     this.sweapon = 'Single Shot';
+    this.hitboxRadius = 13;
   }
   update() {
     if(this.sangle < 0) this.sangle+=TWOPI;
@@ -35,6 +36,11 @@ class Player {
     c.rotate(this.angle);
     c.drawImage(this.img, -this.origin.x, -this.origin.y);
     c.restore();
+    c.beginPath();
+    c.strokeStyle = "#00f";
+    c.lineWidth = .5;
+    c.arc(this.pos.x+Math.sin(this.angle)*this.origin.y*2/7, this.pos.y-Math.cos(this.angle)*this.origin.y*2/7, this.hitboxRadius, 0, TWOPI, false);
+    c.stroke();
   }
 
   move(amt) {
@@ -47,4 +53,5 @@ class Player {
     entities.unshift(new Shot(rad(Math.round(deg(this.sangle))), Math.round(this.spower), this.pos.x+Math.sin(this.angle)*this.origin.y/2+Math.cos(this.sangle)*18, this.pos.y-Math.cos(this.angle)*this.origin.y/2-Math.sin(this.sangle)*18, getShotType(this.sweapon)));
     nextPlayer();
   }
+
 }
