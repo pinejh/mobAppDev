@@ -34,6 +34,15 @@ function update() {
       entities[i].pos.addVector(new Vector(-entities[i].vel.x/3, -entities[i].vel.y/3));
       entities[i].explode();
       entities.splice(i, 1);
+    } else if(entities[i].options.hitPlayer) {
+      plist: for(p of players) {
+        if (entities[i].pos.dist(p.hitbox) < /*entities[i].options.radius +*/ p.hitboxRadius) {
+          //entities[i].pos.addVector(new Vector(-entities[i].vel.x, -entities[i].vel.y));
+          entities[i].explode();
+          entities.splice(i, 1);
+          break plist;
+        }
+      }
     }
   }
   for (var i = players.length-1; i >= 0; i--) {
