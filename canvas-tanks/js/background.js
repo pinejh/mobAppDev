@@ -36,7 +36,7 @@ function groundAngle(x) {
     return (groundAngle(x-.1)+groundAngle(x+.1))/2;
   }
   else {
-    var lower = -ground[Math.floor((x+1)/gXScale)], upper = -ground[Math.ceil((x+1)/gXScale)];
-    return Math.atan((upper-lower)/gXScale)*1.5;
+    var lower = -ground[Math.floor((x+1)/gXScale)]*gYScale, upper = -ground[Math.ceil((x+1)/gXScale)]*gYScale;
+    return Math.atan((upper-lower)/gXScale);
   }
 }

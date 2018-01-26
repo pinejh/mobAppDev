@@ -58,9 +58,9 @@ function handleKeys() {
     //changeweapon
   }
   if(keyMap.a) {
-    currPlayer.move(-1);
+    if(currPlayer.pos.x - 1 > 14) currPlayer.move(-1);
   }
   if(keyMap.d) {
-    currPlayer.move(+1);
+    if(currPlayer.pos.x + 15 < canvas.width) currPlayer.move(+1);
   }
 }

@@ -38,7 +38,7 @@ function update() {
       plist: for(p of players) {
         if (entities[i].pos.dist(p.hitbox) < /*entities[i].options.radius +*/ p.hitboxRadius) {
           //entities[i].pos.addVector(new Vector(-entities[i].vel.x, -entities[i].vel.y));
-          entities[i].explode();
+          entities[i].explode(p);
           entities.splice(i, 1);
           break plist;
         }

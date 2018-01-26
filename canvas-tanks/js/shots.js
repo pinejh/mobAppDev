@@ -29,22 +29,33 @@ class Shot {
     c.fill();
     //console.log(Math.floor(this.pos.x) + ', ' + Math.floor(this.pos.y));
   }
-  explode() {
+  explode(player) {
+    if(this.options.hitPlayer) explosions.push(new Explosion(this.pos, this.options, this.trail, player));
     explosions.push(new Explosion(this.pos, this.options, this.trail));
   }
 }
 
 class Explosion {
-  constructor(pos, options, trail) {
+  constructor(pos, options, trail, player) {
     this.pos = pos;
     this.remove = false;
     this.options = options;
     this.alpha = 1;
     if(this.options.trail) this.trail = trail;
+    if(player && this.options.damage != 0) {
+      this.player = player;
+      this.player.damage(this.options.damage);
+    }
+    for(var i = players.length-1; i >= 0; i--) {
+      if(this.pos.dist(players[i].hitbox) < this.options.explRadius + players[i].hitboxRadius) {
+        if(!(this.options.damage == 0 && this.player == players[i])) {
+          players[i].damage(this.options.explDamage);
+        }
+      }
+    }
   }
   update() {
     if(this.options.trail && this.trail.pts.length > 0) this.trail.stopTrail();
-
     c.save();
     c.beginPath();
     c.arc(this.pos.x, this.pos.y, this.options.explRadius, 0, TWOPI, false);

@@ -13,6 +13,7 @@ class Player {
     this.sweapon = 'Single Shot';
     this.hitbox = new Vector(this.pos.x+Math.sin(this.angle)*this.origin.y*2/7, this.pos.y-Math.cos(this.angle)*this.origin.y*2/7);
     this.hitboxRadius = 13;
+    this.health = 300;
   }
   update() {
     if(this.sangle < 0) this.sangle+=TWOPI;
@@ -23,10 +24,20 @@ class Player {
       dispAngle = -360+dispAngle;
     }
     this.hitbox = new Vector(this.pos.x+Math.sin(this.angle)*this.origin.y*2/7, this.pos.y-Math.cos(this.angle)*this.origin.y*2/7);
+    c.save();
     c.font = "10px Arial";
-    c.fillStyle = "#ffffff";
     c.textAlign = "center";
-    c.fillText(dispAngle+', '+Math.round(this.spower),this.pos.x,this.pos.y-this.origin.y-15);
+    c.shadowColor = "#000";
+    c.shadowBlur = 5;
+    c.fillStyle = "#ffffff";
+    c.fillText(dispAngle+', '+Math.round(this.spower),this.pos.x, this.pos.y+20);
+    c.strokeStyle = '#0f0';
+    c.lineWidth = 3;
+    c.beginPath();
+    c.moveTo(this.hitbox.x-12.5, this.hitbox.y-25);
+    c.lineTo(this.hitbox.x-12.5+25/300*this.health, this.hitbox.y-25);
+    c.stroke();
+    c.restore();
     c.beginPath();
     c.moveTo(this.hitbox.x, this.hitbox.y);
     c.lineTo(this.hitbox.x+Math.cos(this.sangle)*18, this.hitbox.y-Math.sin(this.sangle)*18);
@@ -54,6 +65,11 @@ class Player {
   fire() {
     entities.unshift(new Shot(rad(Math.round(deg(this.sangle))), Math.round(this.spower), this.hitbox.x+Math.cos(this.sangle)*18, this.hitbox.y-Math.sin(this.sangle)*18, getShotType(this.sweapon)));
     nextPlayer();
+  }
+
+  damage(amt) {
+    this.health -= amt;
+    if(this.health<0) this.health = 0;
   }
 
 }
