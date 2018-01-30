@@ -49,17 +49,16 @@ class Player {
     c.rotate(this.angle);
     c.drawImage(this.img, -this.origin.x, -this.origin.y);
     c.restore();
-    /*c.beginPath();
-    c.strokeStyle = "#00f";
-    c.lineWidth = .5;
-    c.arc(this.hitbox.x, this.hitbox.y, this.hitboxRadius, 0, TWOPI, false);
-    c.stroke();*/
   }
 
   move(amt) {
-    this.pos.x += amt;
-    this.pos.y = canvas.height-groundHeight(this.pos.x);
-    this.angle = groundAngle(this.pos.x);
+    var angle = groundAngle(this.pos.x+amt)+TWOPI/4;
+    var sin = Math.sin(angle);
+    if(sin > .25) {
+      this.pos.x += amt;
+      this.pos.y = canvas.height-groundHeight(this.pos.x);
+      this.angle = groundAngle(this.pos.x);
+    }
   }
 
   fire() {
