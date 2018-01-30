@@ -20,12 +20,19 @@ function drawBackground() {
   c.fill();
 }
 
+function xtoi(x) {
+  return (x+1)/gXScale;
+}
+function itox(i) {
+  return i*gXScale-1;
+}
+
 function groundHeight(x) {
   x = clamp(x, -1, 641);
-  if((x+1)%gXScale == 0) return ground[Math.floor((x+1)/gXScale)]*gYScale;
+  if((x+1)%gXScale == 0) return ground[Math.floor(xtoi(x))]*gYScale;
   else {
-    var lower = Math.floor((x+1)/gXScale), upper = Math.ceil((x+1)/gXScale);
-    var weight = -lower + (x+1)/gXScale;
+    var lower = Math.floor(xtoi(x)), upper = Math.ceil(xtoi(x));
+    var weight = -lower + xtoi(x);
     return (ground[lower]*(1-weight)+ground[upper]*weight)*gYScale;
   }
 }
@@ -36,7 +43,24 @@ function groundAngle(x) {
     return (groundAngle(x-.1)+groundAngle(x+.1))/2;
   }
   else {
-    var lower = -ground[Math.floor((x+1)/gXScale)]*gYScale, upper = -ground[Math.ceil((x+1)/gXScale)]*gYScale;
+    var lower = -ground[Math.floor(xtoi(x))]*gYScale, upper = -ground[Math.ceil(xtoi(x))]*gYScale;
     return Math.atan((upper-lower)/gXScale);
+  }
+}
+
+function backgroundAdjust(pos, radius) {
+  var init = Math.floor(xtoi(pos.x - radius));
+  var fin = Math.ceil(xtoi(pos.x + radius));
+  for(var i = init; i < fin; i++) {
+    var delta = Math.sqrt(radius*radius - Math.pow(pos.x-itox(i), 2))/gXScale;
+    var lower = (canvas.height-pos.y)/gYScale-delta;
+    var gh = ground[i];
+    if(gh > lower) {
+      if(gh < lower+delta*2) {
+        ground[i] -= (gh-lower);
+      } else {
+        ground[i] -= (delta*2);
+      }
+    }
   }
 }

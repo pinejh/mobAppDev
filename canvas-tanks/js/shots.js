@@ -31,7 +31,7 @@ class Shot {
   }
   explode(player) {
     if(this.options.hitPlayer) explosions.push(new Explosion(this.pos, this.options, this.trail, player));
-    explosions.push(new Explosion(this.pos, this.options, this.trail));
+    else explosions.push(new Explosion(this.pos, this.options, this.trail));
   }
 }
 
@@ -53,6 +53,7 @@ class Explosion {
         }
       }
     }
+    if(this.options.explGround) backgroundAdjust(this.pos, this.options.explRadius);
   }
   update() {
     if(this.options.trail && this.trail.pts.length > 0) this.trail.stopTrail();

@@ -14,6 +14,7 @@ var shotTypes = [
     explRadius: 12,
     damage: 0,
     hitPlayer: true,
+    explGround: true,
     explDamage: 10,
     explColor: "#ffffff"
   },
@@ -26,6 +27,7 @@ var shotTypes = [
     explRadius: 17.5,
     damage: 0,
     hitPlayer: true,
+    explGround: true,
     explDamage: 10,
     explColor: "#ffffff"
   }
