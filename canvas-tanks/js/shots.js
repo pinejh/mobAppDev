@@ -45,11 +45,13 @@ class Explosion {
     if(player && this.options.damage != 0) {
       this.player = player;
       this.player.damage(this.options.damage);
+      damageIndic(this.pos, this.options.damage);
     }
     for(var i = players.length-1; i >= 0; i--) {
       if(this.pos.dist(players[i].hitbox) < this.options.explRadius + players[i].hitboxRadius) {
         if(!(this.options.damage == 0 && this.player == players[i])) {
           players[i].damage(this.options.explDamage);
+          damageIndic(this.pos, this.options.explDamage);
         }
       }
     }
@@ -100,4 +102,35 @@ class Trail {
     this.draw();
     this.pts.splice(this.pts.length-1, 1);
   }
+}
+
+class DamageIndic {
+  constructor(pos, dmg) {
+    this.pos = new Vector(pos.x, pos.y);
+    this.dmg = dmg;
+    this.alpha = 1;
+    this.remove = false;
+  }
+  update() {
+    if(this.alpha <= 0) this.remove = true;
+    else {
+      c.save();
+      c.font = "10px Arial";
+      c.textAlign = "center";
+      c.shadowColor = "#000";
+      c.shadowBlur = 5;
+      c.fillStyle = "#ff3333";
+      this.alpha -= 1/120;
+      this.pos.y -= .4;
+      this.pos.x += Math.cos(this.alpha * TWOPI*2)*3/4;
+      if(this.alpha <= 0) this.alpha = 0;
+      c.globalAlpha = this.alpha;
+      c.fillText(this.dmg, this.pos.x, this.pos.y);
+      c.restore();
+    }
+  }
+}
+
+function damageIndic(pos, dmg) {
+  dmgindics.push(new DamageIndic(pos, dmg));
 }

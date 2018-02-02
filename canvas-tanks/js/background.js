@@ -4,7 +4,7 @@ var ground = [];
 
 function initBackground() {
   for(var x = 0; x < groundRes; x++) {
-    ground[x] = Math.sin(x/20)*25 + 35;
+    ground[x] = Math.sin(x/20)*20 + 50;
   }
 }
 
@@ -62,5 +62,13 @@ function backgroundAdjust(pos, radius) {
         ground[i] -= (delta*2);
       }
     }
+  }
+  for(p of players) {
+    p.move(0);
+    p.pos.y = canvas.height-groundHeight(p.pos.x);
+  }
+  for(p of deadPlayers) {
+    p.move(0);
+    p.pos.y = canvas.height-groundHeight(p.pos.x);
   }
 }

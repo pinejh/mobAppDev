@@ -4,9 +4,13 @@ canvas.height = 480;
 
 var c = canvas.getContext('2d');
 
+var paused = false;
+
 var players = [];
+var deadPlayers = [];
 var entities = [];
 var explosions = [];
+var dmgindics = [];
 
 var currPlayerIndex = 0;
 var currYOff = 0;
@@ -17,13 +21,14 @@ function init() {
   players.push(new Player(canvas.width/8, 'green'));
   players.push(new Player(canvas.width*7/8, 'red'));
   currPlayer = players[currPlayerIndex];
+  initShots();
   update();
 }
 
 function update() {
   c.clearRect(0, 0, canvas.width, canvas.height);
 
-  handleKeys();
+  if(!paused) handleKeys();
 
   drawBackground();
 
@@ -36,8 +41,7 @@ function update() {
       entities.splice(i, 1);
     } else if(entities[i].options.hitPlayer) {
       plist: for(p of players) {
-        if (entities[i].pos.dist(p.hitbox) < /*entities[i].options.radius +*/ p.hitboxRadius) {
-          //entities[i].pos.addVector(new Vector(-entities[i].vel.x, -entities[i].vel.y));
+        if (entities[i].pos.dist(p.hitbox) < p.hitboxRadius) {
           entities[i].explode(p);
           entities.splice(i, 1);
           break plist;
@@ -45,8 +49,15 @@ function update() {
       }
     }
   }
+  for (p of deadPlayers) {
+    p.update();
+  }
   for (var i = players.length-1; i >= 0; i--) {
     players[i].update();
+    if(!players[i].alive) {
+      deadPlayers.push(new dPlayer(players[i].pos, players[i].origin, players[i].angle));
+      players.splice(i, i+1);
+    }
   }
   if (currYOff <= 0) currYOffDir = 1;
   else if (currYOff >= 10) currYOffDir = -1;
@@ -62,17 +73,32 @@ function update() {
   c.closePath();
   c.fill();
   c.restore();
+  for(var i = dmgindics.length-1; i >= 0; i--) {
+    dmgindics[i].update();
+    if(dmgindics[i].remove) dmgindics.splice(i, 1);
+  }
   for (var i = explosions.length-1; i >= 0; i--) {
     explosions[i].update();
-    if(explosions[i].remove) explosions.splice(i, 1);
+    if(explosions[i].remove) {
+      explosions.splice(i, 1);
+      if(explosions.length == 0) nextPlayer();
+    }
   }
 
   requestAnimationFrame(update);
 }
 
+function pauseForNext() {
+  paused = true;
+}
 function nextPlayer() {
-  currPlayerIndex++;
-  if(currPlayerIndex >= players.length) currPlayerIndex = 0;
-  currPlayer = players[currPlayerIndex];
-  updateWeapon();
+  if(players.length > 1) {
+    paused = false;
+    currPlayerIndex++;
+    if(currPlayerIndex >= players.length) currPlayerIndex = 0;
+    currPlayer = players[currPlayerIndex];
+    updateWeapon();
+  } else if(players.length == 1) {
+    alert('Winner!');
+  } else alert('No Players Remaining.');
 }
