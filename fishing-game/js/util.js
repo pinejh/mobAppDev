@@ -27,3 +27,44 @@ class Vector {
     return this.x +", "+ this.y;
   }
 }
+
+class Particle {
+  constructor(x, y) {
+    if(x == undefined || y == undefined) {
+      this.pos = new Vector();
+    } else {
+      this.pos = new Vector(x, y);
+    }
+    this.vel = new Vector();
+    this.acc = new Vector();
+    this.grav = new Vector();
+  }
+  update() {
+      this.vel.addVector(this.acc);
+      this.pos.addVector(this.vel);
+      this.acc.scale(0);
+      this.acc.addVector(this.grav);
+  }
+  setPos(x, y) {
+    if(y == undefined && x instanceof Vector) {
+      this.pos.x = x.x;
+      this.pos.y = x.y;
+    } else {
+      this.pos.x = x;
+      this.pos.y = y;
+    }
+  }
+  setGrav(x, y) {
+    if(y == undefined && x instanceof Vector) {
+      this.grav.x = x.x;
+      this.grav.y = x.y;
+    } else {
+      this.grav.x = x;
+      this.grav.y = y;
+    }
+  }
+  addForce(x, y) {
+    if(y == undefined && x instanceof Vector) this.acc.addVector(x);
+    else this.acc.addVector(new Vector(x, y));
+  }
+}
