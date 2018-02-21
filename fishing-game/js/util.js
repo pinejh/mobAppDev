@@ -38,12 +38,14 @@ class Particle {
     this.vel = new Vector();
     this.acc = new Vector();
     this.grav = new Vector();
+    this.drag = 1;
   }
   update() {
       this.vel.addVector(this.acc);
       this.pos.addVector(this.vel);
       this.acc.scale(0);
       this.acc.addVector(this.grav);
+      this.vel.scale(this.drag);
   }
   setPos(x, y) {
     if(y == undefined && x instanceof Vector) {
@@ -62,6 +64,9 @@ class Particle {
       this.grav.x = x;
       this.grav.y = y;
     }
+  }
+  setDrag(d) {
+    this.drag = d;
   }
   addForce(x, y) {
     if(y == undefined && x instanceof Vector) this.acc.addVector(x);

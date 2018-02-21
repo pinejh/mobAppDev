@@ -12,12 +12,16 @@ var force = new Vector(0, -.55);
 
 var capture = 0;
 
-var fish = new Vector(origin.x, 450/2);
+var fish;
 var fishAngle = 0;
+var forceScalar = 1;
 
 function init() {
   player = new Particle(origin.x, canvas.height-origin.y);
   player.setGrav(grav);
+  fish = new Particle(origin.x, 450-origin.x);
+  fish.addForce(0, -Math.floor(Math.random()*3)-4);
+  fish.setDrag(.98);
   update();
 }
 
@@ -40,17 +44,25 @@ function update() {
   }
 
   fishAngle += .1;
-  fish.y = (450/2-origin.x)*Math.cos(fishAngle/(Math.PI*2))+450/2;
-  console.log(fishAngle/(2*Math.PI));
+  var newForce = Math.random()*forceScalar-(forceScalar/2);
+  fish.addForce(new Vector(0, newForce));
+  fish.update();
 
-  if(player.pos.dist(fish) < origin.y) {
-    capture += .45;
+  if(fish.pos.y-origin.x < 0) {
+    fish.pos.y = origin.x;
+  }
+  if(fish.pos.y+origin.x > canvas.height) {
+    fish.pos.y = canvas.height-origin.x;
+  }
+
+  if(player.pos.dist(fish.pos) < origin.y) {
+    capture += .40;
     if(capture >= 100) {
       alert('fish caught')
       capture = 0;
     }
   } else {
-    capture -= .375;
+    capture -= .35;
     if(capture < 0) capture = 0;
   }
 
@@ -60,7 +72,7 @@ function update() {
 
   c.beginPath();
   c.fillStyle = "#f00";
-  c.arc(fish.x, fish.y, origin.x, 0, Math.PI*2, false);
+  c.arc(fish.pos.x, fish.pos.y, origin.x, 0, Math.PI*2, false);
   c.fill()
 
   requestAnimationFrame(update);
