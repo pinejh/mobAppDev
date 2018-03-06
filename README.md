@@ -13,3 +13,7 @@ Link to the project [here](./canvas-tanks).
 ### Fishing Game
 A recreation of Stardew Valley's fishing mini-game.
 Link to the project [here](./fishing-game).
+
+### Physics Engine
+A javascript library for basics physics.
+Link to the project [here](./physics-engine).
