@@ -4,7 +4,9 @@ function clamp(num, min, max) {
 
 const DRAG_SPHERE = .47;
 const DRAG_CUBE = 1.05;
-const DRAG_STREAMLINED = .04
+const DRAG_STREAMLINED = .04;
+
+var PHY = {MASS_DENSITY: .25};
 
 class Vector {
   constructor(x, y) {
@@ -22,10 +24,12 @@ class Vector {
   addVector(other) {
     this.x += other.x;
     this.y += other.y;
+    return this;
   }
   scale(scalar) {
     this.x *= scalar;
     this.y *= scalar;
+    return this;
   }
   toString() {
     return this.x +", "+ this.y;
@@ -43,15 +47,22 @@ class Particle {
     this.acc = new Vector();
     this.grav = new Vector();
     this.dragCoeff = DRAG_STREAMLINED;
-    this.drag = 1;
+    this.mass = 1;
+    this.crossArea = 1;
+    this.shape = -1;
   }
-  update() {
+  updatePHY() {
       this.vel.addVector(this.acc);
       this.pos.addVector(this.vel);
       this.acc.scale(0);
-      this.acc.addVector(this.grav);
-      this.vel.scale(this.drag);
+      var newAcc = new Vector(this.grav.x, this.grav.y).scale(this.mass);
+      //Fd = .5*p*v^2*Cd*A
+      var drag = new Vector((this.vel.x < 0 ? 1:-1)*this.vel.x*this.vel.x, (this.vel.y < 0 ? 1:-1)*this.vel.y*this.vel.y).scale(.5*PHY.MASS_DENSITY*this.dragCoeff);
+      //console.log(drag);
+      newAcc.addVector(drag).scale(1/this.mass);
+      this.acc.addVector(newAcc);
       //this.addForce(new Vector(-this.vel.x*this.friction, -this.vel.y*this.friction));
+      //Fd = .5*p*v^2*Cd*A
   }
   setPos(x, y) {
     if(y == undefined && x instanceof Vector) {
