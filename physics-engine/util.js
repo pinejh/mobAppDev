@@ -50,19 +50,19 @@ class Particle {
     this.mass = 1;
     this.crossArea = 1;
     this.shape = -1;
+    this.isStatic = false;
   }
   updatePHY() {
+    if(!this.static) {
       this.vel.addVector(this.acc);
       this.pos.addVector(this.vel);
       this.acc.scale(0);
       var newAcc = new Vector(this.grav.x, this.grav.y).scale(this.mass);
       //Fd = .5*p*v^2*Cd*A
       var drag = new Vector((this.vel.x < 0 ? 1:-1)*this.vel.x*this.vel.x, (this.vel.y < 0 ? 1:-1)*this.vel.y*this.vel.y).scale(.5*PHY.MASS_DENSITY*this.dragCoeff);
-      //console.log(drag);
       newAcc.addVector(drag).scale(1/this.mass);
       this.acc.addVector(newAcc);
-      //this.addForce(new Vector(-this.vel.x*this.friction, -this.vel.y*this.friction));
-      //Fd = .5*p*v^2*Cd*A
+    }
   }
   setPos(x, y) {
     if(y == undefined && x instanceof Vector) {

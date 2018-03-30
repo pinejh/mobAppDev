@@ -1,0 +1,31 @@
+* {
+  font-family: monospace;
+}
+
+body {
+  background-image: url(http://i0.kym-cdn.com/photos/images/original/000/581/296/c09.jpg);
+}
+
+h1 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -100px;
+  margin-top: -100px;
+  animation: rotate infinite 2s linear;
+  height: 80px;
+  width: 200px;
+  color: white;
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  15% { transform: rotate(10deg); }
+  25% { transform: rotate(14deg); }
+  35% { transform: rotate(10deg); }
+  50% { transform: rotate(0deg); }
+  65% { transform: rotate(-10deg); }
+  75% { transform: rotate(-14deg); }
+  85% { transform: rotate(-10deg); }
+  100% { transform: rotate(0deg); }
+}
