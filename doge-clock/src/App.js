@@ -15,6 +15,7 @@ class App extends Component {
   render() {
     var styles = { textAlign: 'center'};
     var time = new Date();
+    // eslint-disable-next-line
     this.state = {
       hours: time.getHours() % 12,
       minutes: time.getMinutes(),
