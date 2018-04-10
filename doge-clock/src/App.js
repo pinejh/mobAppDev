@@ -2,6 +2,15 @@ import React, { Component } from 'react';
 import './App.css';
 
 class App extends Component {
+  constructor() {
+    super();
+    var time = new Date();
+    this.state = {
+      hours: time.getHours() % 12,
+      minutes: time.getMinutes(),
+      seconds: time.getSeconds()
+    };
+  }
   init() {
     setInterval(() => {
       var time = new Date();
@@ -14,13 +23,6 @@ class App extends Component {
   }
   render() {
     var styles = { textAlign: 'center'};
-    var time = new Date();
-    // eslint-disable-next-line
-    this.state = {
-      hours: time.getHours() % 12,
-      minutes: time.getMinutes(),
-      seconds: time.getSeconds()
-    };
     return (
       <div className="doge" onLoad={this.init()}>
         <h1 style={styles}>{(this.state.hours === 0 ? 12 : this.state.hours)}:{(this.state.minutes < 10 ? '0' + this.state.minutes : this.state.minutes)}:{(this.state.seconds < 10 ? '0' + this.state.seconds : this.state.seconds)}<br/>|<br />|<br />|<br />|<br />|<br />O</h1>

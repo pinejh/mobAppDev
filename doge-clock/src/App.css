@@ -4,6 +4,11 @@
 
 body {
   background-image: url(http://i0.kym-cdn.com/photos/images/original/000/581/296/c09.jpg);
+  /*background-size: 100%;*/
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: auto 100vh;
 }
 
 h1 {
