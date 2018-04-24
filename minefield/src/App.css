@@ -1,0 +1,61 @@
+* {
+  font-family: monospace;
+  -webkit-user-select: none; /* Safari */        
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
+}
+
+body {
+  align-items: 'center';
+  justify-content: 'center';
+}
+
+.container {
+  align-items: 'center';
+  justify-content: 'center';
+  display: inline-block;
+  background: #ddd;
+  padding: 1em;
+}
+
+.gameTitle {
+  text-align: center;
+  margin-top: 0px;
+}
+
+#minefield {
+  background-color: #9a9a9a;
+}
+
+.tile {
+  width: 1.5em;
+  height: 1.5em;
+  text-align: center;
+  line-height: 1.5em;
+  background-color: #ddd;
+  margin: 0;
+  font-size: 1.5em;
+  border: 4px solid #9a9a9a;
+}
+.tile-untouched {
+  border-color: #fff #aaa #aaa #fff;
+  border-style: solid;
+  border-width: 4px;
+  color: rgba(0, 0, 0, 0);
+}
+.tile-zero {
+  color: rgba(0, 0, 0, 0);
+}
+
+.bevel-in {
+  border-color: #fff #aaa #aaa #fff;
+  border-style: solid;
+  border-width: 4px;
+}
+
+.bevel-out {
+  border-color: #aaa #fff #fff #aaa;
+  border-style: solid;
+  border-width: 4px;
+}
